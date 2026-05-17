@@ -1,0 +1,56 @@
+### Endpoint Hola mundo
+
+GET http://127.0.0.1:8000
+
+### Probar suma
+GET http://127.0.0.1:8000/suma?num1=100&num2=15
+
+### Probar suma 2
+POST http://127.0.0.1:8000/suma
+Content-Type: application/json
+
+{
+    "num1": 50,
+    "num2": 30
+}
+
+### Probar dividir
+POST http://127.0.0.1:8000/dividir
+Content-Type: application/json
+
+{
+    "num1": 300,
+    "num2": 10
+}
+
+### consultar contactos
+GET http://127.0.0.1:8000/contactos
+
+### registrar contactos
+POST http://127.0.0.1:8000/contacto
+Content-Type: application/json
+
+{
+    "nombre": "Juan",
+    "email": "juan@test.com",
+    "telefono": "12345"
+}
+
+### modificar contactos
+PUT http://127.0.0.1:8000/contacto/1
+Content-Type: application/json
+
+{
+    "nombre": "Pepe",
+    "email": "arturo@test.com",
+    "telefono": "654321"
+}
+
+### borrar contactos
+DELETE http://127.0.0.1:8000/contacto/2
+
+### consultar contacto
+GET http://127.0.0.1:8000/contacto/1
+
+### consultar contactos v2
+GET http://127.0.0.1:8000/contactos-v2

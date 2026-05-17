@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 $capsule = new Capsule;
@@ -6,7 +7,7 @@ $capsule = new Capsule;
 $capsule->addConnection([
     'driver'    => 'mysql',
     'host'      => '127.0.0.1',
-    'database'  => 'contactos_db',
+    'database'  => 'registro_retro_db', 
     'username'  => 'root',
     'password'  => '',
     'charset'   => 'utf8',
