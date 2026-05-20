@@ -9,6 +9,8 @@ $cors      = require __DIR__ . '/../app/Presentation/Middlewares/CorsMiddleware.
 $endpoints = require __DIR__ . '/../app/Presentation/Routers/endpoints.php';
 
 $app = AppFactory::create();
+$app->addRoutingMiddleware();
+$app->addErrorMiddleware(true, true, true);
 
 $cors($app);
 $endpoints($app);

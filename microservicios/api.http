@@ -1,6 +1,8 @@
 ### Endpoint Hola mundo
 
-GET http://127.0.0.1:8000
+GET http://127.0.0.1:8000/sprints
+
+
 
 ### Probar suma
 GET http://127.0.0.1:8000/suma?num1=100&num2=15
@@ -23,34 +25,12 @@ Content-Type: application/json
     "num2": 10
 }
 
-### consultar contactos
-GET http://127.0.0.1:8000/contactos
-
-### registrar contactos
-POST http://127.0.0.1:8000/contacto
+### Probar base de datos
+POST http://127.0.0.1:8000/sprints
 Content-Type: application/json
 
 {
-    "nombre": "Juan",
-    "email": "juan@test.com",
-    "telefono": "12345"
+    "nombre": "Sprint 1",
+    "fecha_inicio": "2025-01-01",
+    "fecha_fin": "2025-01-15"
 }
-
-### modificar contactos
-PUT http://127.0.0.1:8000/contacto/1
-Content-Type: application/json
-
-{
-    "nombre": "Pepe",
-    "email": "arturo@test.com",
-    "telefono": "654321"
-}
-
-### borrar contactos
-DELETE http://127.0.0.1:8000/contacto/2
-
-### consultar contacto
-GET http://127.0.0.1:8000/contacto/1
-
-### consultar contactos v2
-GET http://127.0.0.1:8000/contactos-v2

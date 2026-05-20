@@ -24,6 +24,7 @@ async function cargarSprints() {
     } catch {
         lista.innerHTML = '<div class="loading-state">Error al conectar con el servidor.</div>';
         mostrarToast('Error al cargar los sprints', 'error');
+        
     }
 }
 

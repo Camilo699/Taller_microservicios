@@ -9,7 +9,28 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 class SprintRepository
 {
-    function list(Request $request, Response $response)
+
+function list(Request $request, Response $response)
+{
+    try {
+        $controller = new SprintController();
+        $sprints = $controller->getSprints();
+        $response->getBody()->write($sprints->toJson());
+        return $response
+            ->withStatus(200)
+            ->withHeader('Content-Type', 'application/json');
+    } catch (\Throwable $ex) {
+        $response->getBody()->write(json_encode([
+            'msg'   => $ex->getMessage(),
+            'file'  => $ex->getFile(),
+            'line'  => $ex->getLine()
+        ]));
+        return $response
+            ->withStatus(500)
+            ->withHeader('Content-Type', 'application/json');
+    }
+}
+ /*   function list(Request $request, Response $response)
     {
         try {
             $controller = new SprintController();
@@ -25,7 +46,7 @@ class SprintRepository
                 ->withHeader('Content-Type', 'application/json');
         }
     }
-
+*/ 
     function create(Request $request, Response $response)
     {
         try {
