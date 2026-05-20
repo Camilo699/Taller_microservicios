@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Retrospectivas Ágiles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/modals.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-brand">
+                <span class="brand-icon">◈</span>
+                <div>
+                    <h1 class="brand-title">RetroTrack</h1>
+                    <p class="brand-sub">Registro de Retrospectivas Ágiles</p>
+                </div>
+            </div>
+            <nav class="header-nav">
+                <button class="nav-btn active" data-view="sprints">Sprints</button>
+                <button class="nav-btn" data-view="tablero">Tablero Retro</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <!-- ═══ VISTA: SPRINTS ═══ -->
+        <section id="view-sprints" class="view active">
+            <div class="view-header">
+                <div>
+                    <h2 class="view-title">Sprints</h2>
+                    <p class="view-desc">Gestiona los ciclos de trabajo de tu equipo</p>
+                </div>
+                <button class="btn-primary" id="btn-nuevo-sprint">+ Nuevo Sprint</button>
+            </div>
+
+            <div id="lista-sprints" class="sprints-grid">
+                <div class="loading-state">Cargando sprints...</div>
+            </div>
+        </section>
+
+        <!-- ═══ VISTA: TABLERO RETRO ═══ -->
+        <section id="view-tablero" class="view">
+            <div class="view-header">
+                <div>
+                    <h2 class="view-title">Tablero Retrospectiva</h2>
+                    <p class="view-desc">Registra logros, impedimentos y acciones del sprint</p>
+                </div>
+                <div class="tablero-controls">
+                    <select id="select-sprint" class="select-sprint">
+                        <option value="">— Selecciona un Sprint —</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Acciones del sprint anterior -->
+            <div id="acciones-anteriores-section" class="acciones-anteriores hidden">
+                <div class="acciones-header">
+                    <span class="acciones-icon">↩</span>
+                    <h3>Compromisos del Sprint Anterior</h3>
+                </div>
+                <div id="lista-acciones-anteriores" class="acciones-grid"></div>
+            </div>
+
+            <!-- Columnas del tablero -->
+            <div class="tablero-board" id="tablero-board">
+                <div class="board-empty-state">
+                    <p>Selecciona un sprint para ver o registrar su retrospectiva</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ═══ MODAL: SPRINT ═══ -->
+    <div id="modal-sprint" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-sprint-titulo">Nuevo Sprint</h3>
+                <button class="modal-close" data-modal="modal-sprint">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="sprint-id">
+                <div class="form-group">
+                    <label class="form-label">Nombre del Sprint</label>
+                    <input type="text" id="sprint-nombre" class="form-input" placeholder="Ej: Sprint 1 - Módulo Login">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Fecha Inicio</label>
+                        <input type="date" id="sprint-inicio" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fecha Fin</label>
+                        <input type="date" id="sprint-fin" class="form-input">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" data-modal="modal-sprint">Cancelar</button>
+                <button class="btn-primary" id="btn-guardar-sprint">Guardar Sprint</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ MODAL: RETRO ITEM ═══ -->
+    <div id="modal-item" class="modal-overlay hidden">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 class="modal-title" id="modal-item-titulo">Nuevo Registro</h3>
+                <button class="modal-close" data-modal="modal-item">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="item-id">
+                <div class="form-group">
+                    <label class="form-label">Categoría</label>
+                    <select id="item-categoria" class="form-input">
+                        <option value="logro">✦ Logro</option>
+                        <option value="impedimento">✗ Impedimento</option>
+                        <option value="accion">→ Acción / Compromiso</option>
+                        <option value="comentario">◎ Comentario</option>
+                        <option value="otro">○ Otro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Descripción</label>
+                    <textarea id="item-descripcion" class="form-input form-textarea" placeholder="Describe este punto de la retrospectiva..."></textarea>
+                </div>
+                <div class="form-group" id="grupo-cumplida" style="display:none">
+                    <label class="form-label">¿Se cumplió este compromiso?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="cumplida" value="1"> Sí, se cumplió
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="cumplida" value="0"> No se cumplió
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="cumplida" value="" checked> Pendiente
+                        </label>
+                    </div>
+                </div>
+                <div class="form-group" id="grupo-fecha-revision" style="display:none">
+                    <label class="form-label">Fecha de Revisión</label>
+                    <input type="date" id="item-fecha-revision" class="form-input">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" data-modal="modal-item">Cancelar</button>
+                <button class="btn-primary" id="btn-guardar-item">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ MODAL: CONFIRMAR ELIMINAR ═══ -->
+    <div id="modal-confirmar" class="modal-overlay hidden">
+        <div class="modal modal-sm">
+            <div class="modal-header">
+                <h3 class="modal-title">Confirmar eliminación</h3>
+                <button class="modal-close" data-modal="modal-confirmar">✕</button>
+            </div>
+            <div class="modal-body">
+                <p id="confirmar-mensaje" class="confirmar-texto">¿Estás seguro de que deseas eliminar este registro?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" data-modal="modal-confirmar">Cancelar</button>
+                <button class="btn-danger" id="btn-confirmar-eliminar">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="js/modal.js"></script>
+    <script src="js/sprints.js"></script>
+    <script src="js/retroitems.js"></script>
+</body>
+</html>
