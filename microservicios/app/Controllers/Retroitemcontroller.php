@@ -76,7 +76,6 @@ class RetroItemController
         $item->descripcion    = $data['descripcion']    ?? $item->descripcion;
         $item->fecha_revision = $data['fecha_revision'] ?? $item->fecha_revision;
 
-        // cumplida solo aplica para acciones
         if ($item->categoria === 'accion') {
             $item->cumplida = $data['cumplida'] ?? $item->cumplida;
         } else {

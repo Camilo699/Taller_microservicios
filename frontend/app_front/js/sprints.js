@@ -1,10 +1,5 @@
-// ═══════════════════════════════════════════
-//  sprints.js — CRUD de sprints
-// ═══════════════════════════════════════════
-
 let sprintAEliminar = null;
 
-// ── Cargar y renderizar sprints ──
 async function cargarSprints() {
     const lista = document.getElementById('lista-sprints');
     lista.innerHTML = '<div class="loading-state">Cargando sprints...</div>';
@@ -56,7 +51,7 @@ function formatFecha(fecha) {
     return `${d}/${m}/${y}`;
 }
 
-// ── Ir al tablero desde la card ──
+
 function irATablero(sprintId) {
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
@@ -70,7 +65,7 @@ function irATablero(sprintId) {
     });
 }
 
-// ── Abrir modal nuevo sprint ──
+
 document.getElementById('btn-nuevo-sprint').addEventListener('click', () => {
     document.getElementById('modal-sprint-titulo').textContent = 'Nuevo Sprint';
     document.getElementById('sprint-id').value = '';
@@ -80,7 +75,7 @@ document.getElementById('btn-nuevo-sprint').addEventListener('click', () => {
     abrirModal('modal-sprint');
 });
 
-// ── Editar sprint ──
+
 async function editarSprint(id) {
     try {
         const res = await fetch(`${API}/sprints/${id}`);
@@ -96,7 +91,7 @@ async function editarSprint(id) {
     }
 }
 
-// ── Guardar (crear o editar) ──
+
 document.getElementById('btn-guardar-sprint').addEventListener('click', async () => {
     const id     = document.getElementById('sprint-id').value;
     const nombre = document.getElementById('sprint-nombre').value.trim();
@@ -128,7 +123,7 @@ document.getElementById('btn-guardar-sprint').addEventListener('click', async ()
     }
 });
 
-// ── Confirmar eliminar ──
+
 function confirmarEliminarSprint(id, nombre) {
     sprintAEliminar = id;
     document.getElementById('confirmar-mensaje').textContent =
@@ -151,5 +146,4 @@ document.getElementById('btn-confirmar-eliminar').addEventListener('click', asyn
     }
 });
 
-// ── Init ──
 cargarSprints();

@@ -1,6 +1,3 @@
-// ═══════════════════════════════════════════
-//  retroitems.js — Tablero de retrospectiva
-// ═══════════════════════════════════════════
 
 let sprintSeleccionado = null;
 let categoriaActual    = null;
@@ -14,7 +11,7 @@ const CATEGORIAS = [
     { key: 'otro',        label: 'Otros',         icon: '○' },
 ];
 
-// ── Select de sprint cambia ──
+
 document.getElementById('select-sprint').addEventListener('change', async function () {
     sprintSeleccionado = this.value;
     if (!sprintSeleccionado) {
@@ -27,7 +24,6 @@ document.getElementById('select-sprint').addEventListener('change', async functi
     await cargarAccionesAnteriores(sprintSeleccionado);
 });
 
-// ── Cargar tablero completo ──
 async function cargarTablero(sprintId) {
     const board = document.getElementById('tablero-board');
     board.innerHTML = '';
@@ -41,14 +37,13 @@ async function cargarTablero(sprintId) {
             if (!Array.isArray(items)) items = [];
         }
 
-        // Columnas principales (logro, impedimento, accion)
         const principales = CATEGORIAS.slice(0, 3);
         principales.forEach(cat => {
             const col = crearColumna(cat, items.filter(i => i.categoria === cat.key), sprintId);
             board.appendChild(col);
         });
 
-        // Fila extra para comentario y otro
+        
         const extra = document.createElement('div');
         extra.className = 'tablero-board-extra';
         CATEGORIAS.slice(3).forEach(cat => {
@@ -109,7 +104,6 @@ function renderItemCard(item) {
     `;
 }
 
-// ── Cargar acciones del sprint anterior ──
 async function cargarAccionesAnteriores(sprintId) {
     const section = document.getElementById('acciones-anteriores-section');
     const lista   = document.getElementById('lista-acciones-anteriores');
@@ -146,7 +140,6 @@ async function cargarAccionesAnteriores(sprintId) {
     }
 }
 
-// ── Abrir modal para nuevo item ──
 function abrirModalItem(categoria, sprintId) {
     categoriaActual = categoria;
     document.getElementById('modal-item-titulo').textContent = 'Nuevo Registro';
@@ -159,7 +152,6 @@ function abrirModalItem(categoria, sprintId) {
     abrirModal('modal-item');
 }
 
-// ── Editar item ──
 async function editarItem(id) {
     try {
         const res  = await fetch(`${API}/retro-items/${id}`);
@@ -183,7 +175,6 @@ async function editarItem(id) {
     }
 }
 
-// ── Mostrar/ocultar campos de acción ──
 document.getElementById('item-categoria').addEventListener('change', function () {
     toggleCamposAccion(this.value);
 });
@@ -194,7 +185,6 @@ function toggleCamposAccion(categoria) {
     document.getElementById('grupo-fecha-revision').style.display = mostrar ? 'block' : 'none';
 }
 
-// ── Guardar item ──
 document.getElementById('btn-guardar-item').addEventListener('click', async () => {
     const id          = document.getElementById('item-id').value;
     const categoria   = document.getElementById('item-categoria').value;
@@ -233,7 +223,7 @@ document.getElementById('btn-guardar-item').addEventListener('click', async () =
     }
 });
 
-// ── Confirmar eliminar item ──
+
 function confirmarEliminarItem(id) {
     itemAEliminar = id;
     document.getElementById('confirmar-mensaje').textContent =
@@ -241,7 +231,7 @@ function confirmarEliminarItem(id) {
     abrirModal('modal-confirmar');
 }
 
-// Sobreescribir el botón confirmar para manejar tanto sprint como item
+
 document.getElementById('btn-confirmar-eliminar').addEventListener('click', async () => {
     if (itemAEliminar) {
         try {
@@ -256,4 +246,4 @@ document.getElementById('btn-confirmar-eliminar').addEventListener('click', asyn
             itemAEliminar = null;
         }
     }
-}, true); // captura antes que el listener de sprints.js
+}, true);

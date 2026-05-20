@@ -8,13 +8,11 @@ use Slim\Routing\RouteCollectorProxy;
 
 return function (App $app) {
 
-    // ─── TEST / Verificación del servidor ────────────────────────────────────
     $app->get('/',         [TestRepository::class, 'index']);
     $app->get('/suma',     [TestRepository::class, 'sumar1']);
     $app->post('/suma',    [TestRepository::class, 'sumar2']);
     $app->post('/dividir', [TestRepository::class, 'dividir']);
 
-    // ─── SPRINTS ──────────────────────────────────────────────────────────────
     $app->group('/sprints', function (RouteCollectorProxy $group) {
         $group->get('',         [SprintRepository::class, 'list']);
         $group->post('',        [SprintRepository::class, 'create']);
@@ -23,7 +21,6 @@ return function (App $app) {
         $group->delete('/{id}', [SprintRepository::class, 'delete']);
     });
 
-    // ─── RETRO ITEMS ──────────────────────────────────────────────────────────
     $app->group('/retro-items', function (RouteCollectorProxy $group) {
         $group->get('',                                [RetroItemRepository::class, 'list']);
         $group->post('',                               [RetroItemRepository::class, 'create']);

@@ -30,23 +30,7 @@ function list(Request $request, Response $response)
             ->withHeader('Content-Type', 'application/json');
     }
 }
- /*   function list(Request $request, Response $response)
-    {
-        try {
-            $controller = new SprintController();
-            $sprints = $controller->getSprints();
-            $response->getBody()->write($sprints->toJson());
-            return $response
-                ->withStatus(200)
-                ->withHeader('Content-Type', 'application/json');
-        } catch (Exception $ex) {
-            $response->getBody()->write(json_encode(['msg' => 'Error al obtener los sprints']));
-            return $response
-                ->withStatus(500)
-                ->withHeader('Content-Type', 'application/json');
-        }
-    }
-*/ 
+ 
     function create(Request $request, Response $response)
     {
         try {

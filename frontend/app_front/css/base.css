@@ -1,9 +1,3 @@
-/* ═══════════════════════════════════════════
-   RETROTRACK — base.css
-   Tema: Industrial / Utilitarian + color vivo
-═══════════════════════════════════════════ */
-
-/* ── Variables ── */
 :root {
     --c-bg:         #0f0f11;
     --c-surface:    #1a1a1f;
@@ -28,7 +22,6 @@
     --transition:   all 0.2s ease;
 }
 
-/* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }
@@ -42,14 +35,11 @@ body {
     min-height: 100vh;
 }
 
-/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--c-bg); }
 ::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 3px; }
 
-/* ════════════════════════════
-   HEADER
-════════════════════════════ */
+
 .header {
     background: var(--c-surface);
     border-bottom: 1px solid var(--c-border);
@@ -125,9 +115,6 @@ body {
     font-weight: 700;
 }
 
-/* ════════════════════════════
-   MAIN / VISTAS
-════════════════════════════ */
 .main {
     max-width: 1200px;
     margin: 0 auto;
@@ -164,9 +151,6 @@ body {
     margin-top: 4px;
 }
 
-/* ════════════════════════════
-   BOTONES
-════════════════════════════ */
 .btn-primary {
     background: var(--c-accent);
     color: #000;
@@ -241,9 +225,7 @@ body {
 .btn-icon.edit:hover  { color: var(--c-accent3); border-color: var(--c-accent3); }
 .btn-icon.delete:hover { color: var(--c-accent2); border-color: var(--c-accent2); }
 
-/* ════════════════════════════
-   SPRINTS GRID
-════════════════════════════ */
+
 .sprints-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -334,9 +316,7 @@ body {
     color: var(--c-accent);
 }
 
-/* ════════════════════════════
-   TABLERO
-════════════════════════════ */
+
 .tablero-controls {
     display: flex;
     gap: 10px;
@@ -484,7 +464,7 @@ body {
     grid-column: span 1;
 }
 
-/* Segunda fila de columnas (comentario y otro) */
+
 .tablero-board-extra {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -492,9 +472,7 @@ body {
     margin-top: 16px;
 }
 
-/* ════════════════════════════
-   ACCIONES ANTERIORES
-════════════════════════════ */
+
 .acciones-anteriores {
     background: var(--c-surface);
     border: 1px solid var(--c-accion);
@@ -545,9 +523,7 @@ body {
     color: var(--c-text-muted);
 }
 
-/* ════════════════════════════
-   FORMULARIOS
-════════════════════════════ */
+
 .form-group { margin-bottom: 16px; }
 
 .form-label {
@@ -608,9 +584,7 @@ body {
 
 .radio-label input[type="radio"] { accent-color: var(--c-accent); }
 
-/* ════════════════════════════
-   TOAST
-════════════════════════════ */
+
 .toast {
     position: fixed;
     bottom: 24px;
@@ -636,9 +610,7 @@ body {
     to   { opacity: 1; transform: translateY(0); }
 }
 
-/* ════════════════════════════
-   ESTADOS VACÍOS / LOADING
-════════════════════════════ */
+
 .loading-state {
     grid-column: 1 / -1;
     text-align: center;
@@ -657,9 +629,6 @@ body {
 
 .hidden { display: none !important; }
 
-/* ════════════════════════════
-   RESPONSIVE
-════════════════════════════ */
 @media (max-width: 768px) {
     .tablero-board { grid-template-columns: 1fr; }
     .tablero-board-extra { grid-template-columns: 1fr; }
