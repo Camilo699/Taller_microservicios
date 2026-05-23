@@ -375,6 +375,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
     border-bottom: 1px solid var(--c-border);
 }
 
@@ -385,6 +386,10 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
+
+    flex: 1;
+    min-width: 0;
+    white-space: nowrap;
 }
 
 .board-col-icon { font-size: 16px; }
@@ -402,6 +407,10 @@ body {
     line-height: 1;
     transition: var(--transition);
     padding: 2px 6px;
+}
+
+.btn-add-item {
+    flex-shrink: 0;
 }
 
 .btn-add-item:hover { color: var(--c-text); transform: scale(1.2); }
@@ -467,10 +476,14 @@ body {
 
 .tablero-board-extra {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 16px;
     margin-top: 16px;
 }
+
+/* Cada columna extra ocupa exactamente 1 de las 3 fracciones = mismo ancho que arriba */
+.tablero-board-extra .board-col:nth-child(1) { grid-column: 1; }
+.tablero-board-extra .board-col:nth-child(2) { grid-column: 2; }
 
 
 .acciones-anteriores {

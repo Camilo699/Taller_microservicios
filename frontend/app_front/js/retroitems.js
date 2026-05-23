@@ -1,4 +1,3 @@
-
 let sprintSeleccionado = null;
 let categoriaActual    = null;
 let itemAEliminar      = null;
@@ -26,7 +25,9 @@ document.getElementById('select-sprint').addEventListener('change', async functi
 
 async function cargarTablero(sprintId) {
     const board = document.getElementById('tablero-board');
+    const extra = document.getElementById('tablero-board-extra');
     board.innerHTML = '';
+    extra.innerHTML = '';
 
     try {
         const res   = await fetch(`${API}/retro-items/sprint/${sprintId}`);
@@ -37,20 +38,17 @@ async function cargarTablero(sprintId) {
             if (!Array.isArray(items)) items = [];
         }
 
-        const principales = CATEGORIAS.slice(0, 3);
-        principales.forEach(cat => {
+       
+        CATEGORIAS.slice(0, 3).forEach(cat => {
             const col = crearColumna(cat, items.filter(i => i.categoria === cat.key), sprintId);
             board.appendChild(col);
         });
 
         
-        const extra = document.createElement('div');
-        extra.className = 'tablero-board-extra';
         CATEGORIAS.slice(3).forEach(cat => {
             const col = crearColumna(cat, items.filter(i => i.categoria === cat.key), sprintId);
             extra.appendChild(col);
         });
-        board.appendChild(extra);
 
     } catch {
         board.innerHTML = '<div class="board-empty-state"><p>Error al cargar el tablero.</p></div>';
